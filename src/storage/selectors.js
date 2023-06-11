@@ -3,4 +3,5 @@ export const contactsSelector = state => ({
         contact.name.toLowerCase().includes(state.filter.toLowerCase())
     ),
     filter: state.filter
-});;
+});
+

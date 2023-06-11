@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { addContactsAction, filterContactsAction, removeContactsAction } from "./action";
 
-const initState = {
+export const initState = {
     contacts: [],
     filter: '',
 }
