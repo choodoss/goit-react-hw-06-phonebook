@@ -1,21 +1,40 @@
 import PropTypes from 'prop-types';
+import { List, Box, Avatar, ListItem, IconButton, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { IoIosContact } from 'react-icons/io';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import generateId from '../tools/idRandomize';
-import { Item, ListItems } from './List.styled'
-import Button from '@mui/material/Button';
 
-export default function List({ getFilterContacts, hendleContactRemove }) {
-    const list =
-        <ListItems>
-            {getFilterContacts.length !== 0 && getFilterContacts.map((item, i) => (
-                <Item key={generateId()}>
-                    <p>{item.name}: {item.phone}</p>
-                    <Button variant="outlined" type="button" id={item.id} onClick={hendleContactRemove}>Delete</Button>
-                </Item>))}
-        </ListItems>
-    return list;
+export default function ContactList({ contacts, handleContactRemove }) {
+    return (
+        <Box maxWidth={400} margin={'0 auto'}>
+            <List>
+                {contacts.length !== 0 &&
+                    contacts.map((item) => (
+                        <ListItem sx={{padding:0, paddingBottom: '0.3rem'}} key={generateId()} secondaryAction={<IconButton edge="end" aria-label="delete" id={item.id} onClick={handleContactRemove}><RiDeleteBin6Line /></IconButton>}>
+                            <ListItemAvatar>
+                                <Avatar fontSize="large">
+                                    <IoIosContact size={30}/>
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText>
+                                <Typography variant="body1" component="span" style={{ fontSize: '1.1rem' }}>
+                                    {item.name}: {item.phone}
+                                </Typography>
+                            </ListItemText>
+                        </ListItem>
+                    ))}
+            </List>
+        </Box>
+    );
 }
 
-List.propTypes = {
-    hendleContactRemove: PropTypes.func,
+ContactList.propTypes = {
+    handleContactRemove: PropTypes.func,
     getFilterContacts: PropTypes.array,
-}
+};
+
+
+
+
+
+

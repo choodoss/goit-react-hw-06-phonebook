@@ -1,5 +1,9 @@
-import styled from '@emotion/styled';
+import { styled } from '@mui/system';
 
-export const AppCont = styled.div`
-margin: 0 25px;
-`;
+export const AppContainer = styled('div')({
+    maxWidth: '600px',
+    margin: '0 auto',
+    padding: '20px',
+    textAlign: 'center',
+  });
+  

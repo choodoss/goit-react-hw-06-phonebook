@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import { FormSection, Label, Input, SubmitBt } from './Form.styled';
+import { TextField, Button } from '@mui/material';
 import generateId from '../tools/idRandomize';
 import { useState } from 'react';
+import { FormSection } from './Form.styled';
 
 const inputIdName = generateId();
 const inputIdNTel = generateId();
@@ -15,7 +16,7 @@ const Form = ({ onSubmit }) => {
         if (name === 'number') setNumber(value);
     };
 
-    const handleSubmitForm = e => {
+    const handleSubmitForm = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         onSubmit(formData);
@@ -23,34 +24,36 @@ const Form = ({ onSubmit }) => {
         setNumber('');
     };
 
-    const form = (
+    return (
         <FormSection onSubmit={handleSubmitForm}>
-            <Label htmlFor={inputIdName}>Name</Label>
-            <Input
+            <TextField
                 id={inputIdName}
+                label="Name"
+                variant="outlined"
                 onChange={handleInput}
-                type="text"
                 name="name"
-                pattern="^[a-zA-Z\u0080-\uFFFF '-]+$"
+                pattern="^[A-Za-z\u0080-\uFFFF ']+$"
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 value={name}
                 required
             />
-            <Label htmlFor={inputIdNTel}>Phone</Label>
-            <Input
+            <TextField
                 id={inputIdNTel}
+                label="Phone"
+                variant="outlined"
                 onChange={handleInput}
                 value={number}
                 type="tel"
                 name="number"
-                pattern="^\\+?\\d{1,4}[-.\\s]?\\(?(?:\\d{1,3})\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}$"
+                pattern="^(\+?[0-9.\(\)\-\s]*)$"
                 title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                 required
             />
-            <SubmitBt type="submit">add contact</SubmitBt>
+            <Button variant="contained" type="submit">
+                Add Contact
+            </Button>
         </FormSection>
     );
-    return form;
 };
 
 export default Form;
