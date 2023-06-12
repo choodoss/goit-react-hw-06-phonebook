@@ -7,8 +7,8 @@ import { Typography } from '@mui/material';
 import { contactsSelector } from '../storage/selectors';
 import { add, addFilter, remove } from '../storage/contactSlice';
 import ContactList from '../List/ContactList';
-
-
+import { createNotification } from '../tools/nofications';
+import { NotificationContainer } from 'react-notifications';
 
 export default function App() {
   const { contacts, filter } = useSelector(contactsSelector);
@@ -25,7 +25,7 @@ export default function App() {
   const handleSubmitForm = (formData) => {
     const findErr = contacts.find(contact => contact.name.toLowerCase() === formData.get('name').toLowerCase());
     if (findErr) {
-      alert("The contact already exists in the contact book");
+      createNotification();
       return;
     }
     dispatch(add({ id: generateId(), name: formData.get('name'), phone: formData.get('number') }));
@@ -38,6 +38,7 @@ export default function App() {
       <Typography sx={{ marginBottom: '0.2rem', fontSize: 'clamp(3rem, 5rem, 100%)' }} variant="h2">Contacts</Typography>
       <Search handleFilter={handleFilter} filter={filter} />
       <ContactList contacts={contacts} handleContactRemove={handleContactRemove} />
+      <NotificationContainer />
     </AppContainer>;
 
   return app;
