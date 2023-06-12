@@ -1,7 +1,8 @@
-import { reducer } from "./contactSlice";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'reduxjs-toolkit-persist';
 import storage from 'reduxjs-toolkit-persist/lib/storage'
+import { reducer } from "./reducer";
+
 
 const persistConfig = {
     key: 'contact',

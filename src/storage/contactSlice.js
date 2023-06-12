@@ -20,26 +20,21 @@ const initialState = {
         id: "5",
         name: 'Василь Іванов',
         phone: '+380501112233'
-    }],
-    filter: '',
+    }]
 }
 const contactSlice = createSlice({
     name: 'contacts',
     initialState,
     reducers: {
-        add: (state, { payload }) => {
+        addContact: (state, { payload }) => {
             state.contacts = [...state.contacts, payload].sort((a, b) => a.name.localeCompare(b.name));
-            console.log(state)
         },
-        remove: (state, { payload }) => {
+        removeContact: (state, { payload }) => {
             state.contacts = state.contacts.filter(contact => !contact.id.includes(payload));
-        },
-        addFilter: (state, { payload }) => {
-            state.filter = payload;
         }
     }
 });
 
-export const reducer = contactSlice.reducer;
+export const reducerContact = contactSlice.reducer;
 
-export const { add, remove, addFilter } = contactSlice.actions;
+export const { addContact, removeContact } = contactSlice.actions;

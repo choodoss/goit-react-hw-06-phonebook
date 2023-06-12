@@ -4,14 +4,15 @@ import Form from '../Form/Form';
 import Search from '../Search/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
-import { contactsSelector } from '../storage/selectors';
-import { add, addFilter, remove } from '../storage/contactSlice';
+import { allsSelector } from '../storage/selectors';
+import { addContact, removeContact } from '../storage/contactSlice';
 import ContactList from '../List/ContactList';
 import { createNotification } from '../tools/nofications';
 import { NotificationContainer } from 'react-notifications';
+import { addFilter } from '../storage/filterSlice';
 
 export default function App() {
-  const { contacts, filter } = useSelector(contactsSelector);
+  const { contacts, filter } = useSelector(allsSelector);
   const dispatch = useDispatch();
 
   const handleFilter = (value) => {
@@ -19,7 +20,7 @@ export default function App() {
   };
 
   const handleContactRemove = ({ currentTarget: { id } }) => {
-    dispatch(remove(id));
+    dispatch(removeContact(id));
   };
 
   const handleSubmitForm = (formData) => {
@@ -28,7 +29,7 @@ export default function App() {
       createNotification();
       return;
     }
-    dispatch(add({ id: generateId(), name: formData.get('name'), phone: formData.get('number') }));
+    dispatch(addContact({ id: generateId(), name: formData.get('name'), phone: formData.get('number') }));
   };
 
   const app =
