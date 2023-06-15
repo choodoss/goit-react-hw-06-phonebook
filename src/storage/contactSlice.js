@@ -8,10 +8,10 @@ const contactSlice = createSlice({
     initialState,
     reducers: {
         addContact: (state, { payload }) => {
-            return [...state.contacts, payload].sort((a, b) => a.name.localeCompare(b.name));
+            state.contacts = [...state.contacts, payload].sort((a, b) => a.name.localeCompare(b.name));
         },
         removeContact: (state, { payload }) => {
-            return state.contacts.filter(contact => !contact.id.includes(payload));
+            state.contacts = state.contacts.filter(contact => !contact.id.includes(payload));
         }
     }
 });
